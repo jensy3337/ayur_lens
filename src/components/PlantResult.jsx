@@ -35,13 +35,13 @@ export default function PlantResult({ result, imagePreview, onReset }) {
       animate={{ opacity: 1 }}
       className="result-card bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100"
     >
-      <div className="result-hero relative h-48 bg-emerald-900">
-        <img src={heroImage} className="w-full h-full object-cover opacity-60" alt={plantData.commonName} />
-        <div className="result-title absolute bottom-4 left-4 text-white">
+      <div className="result-hero relative bg-emerald-900">
+        <img src={heroImage} className="result-hero-image object-cover opacity-60" alt={plantData.commonName} />
+        <div className="result-title text-white">
           <h2 className="text-3xl font-bold">{plantData.commonName}</h2>
           <p className="text-emerald-200 italic">{plantData.scientificName}</p>
         </div>
-        <div className="result-match absolute top-4 right-4 bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-md">
+        <div className="result-match bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-md">
           {confidenceScore}% Match
         </div>
       </div>
