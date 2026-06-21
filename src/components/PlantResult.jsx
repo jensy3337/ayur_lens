@@ -65,7 +65,7 @@ export default function PlantResult({ result, imagePreview, onReset }) {
           </DetailBlock>
 
           {taxonomyEntries.length > 0 && (
-            <DetailBlock icon={BookOpen} title="Taxonomy">
+            <DetailBlock icon={BookOpen} title="Classification">
               <dl className="taxonomy-list">
                 {taxonomyEntries.map(([key, value]) => (
                   <div key={key}>

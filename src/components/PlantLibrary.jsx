@@ -292,7 +292,7 @@ export default function PlantLibrary() {
         <div className="empty-state online-search-state">
           <Loader2 className="w-12 h-12 animate-spin" />
           <h3>Searching online plant sources</h3>
-          <p>Looking for a relevant plant result for “{query.trim()}”.</p>
+          <p>Looking for a relevant plant result for "{query.trim()}".</p>
         </div>
       )}
 

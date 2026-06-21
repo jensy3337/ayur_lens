@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Bot, Loader2, Send, UserRound } from 'lucide-react';
 import { plantDatabase } from '../data/plantdatabase';
 
-const GEMINI_MODEL = 'gemini-3.5-flash';
+const GEMINI_MODEL = import.meta.env.VITE_GEMINI_MODEL || 'gemini-3.5-flash';
 const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
 const starterMessages = [
@@ -24,7 +24,7 @@ const createCompleteSummary = (text, maxSentences = 4) => {
   return sentences.slice(0, maxSentences).join(' ').trim();
 };
 
-const removeTrailingEllipsis = (text) => text.replace(/\s*(\.{3}|…)\s*$/u, '.').trim();
+const removeTrailingEllipsis = (text) => text.replace(/\s*(\.{3}|\u2026)\s*$/u, '.').trim();
 
 const createPlantAnswer = (question) => {
   const normalizedQuestion = question.toLowerCase();
@@ -249,15 +249,14 @@ export default function Assistant() {
       return;
     }
 
+    const userMessage = { role: 'user', text: trimmedQuestion };
+
     setQuestion('');
     setIsThinking(true);
-    setMessages((currentMessages) => [
-      ...currentMessages,
-      { role: 'user', text: trimmedQuestion },
-    ]);
+    setMessages((currentMessages) => [...currentMessages, userMessage]);
 
     try {
-      const answer = await createAnswer(trimmedQuestion, messages);
+      const answer = await createAnswer(trimmedQuestion, [...messages, userMessage]);
       setMessages((currentMessages) => [
         ...currentMessages,
         { role: 'assistant', text: answer },

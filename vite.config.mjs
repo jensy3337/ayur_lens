@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   cacheDir: '.vite-cache',
   build: {
+    emptyOutDir: false,
     rollupOptions: {
       output: {
         entryFileNames: 'assets/[name].js',

@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { UploadCloud, Camera, Loader2, ShieldAlert } from 'lucide-react';
-import { identifyPlant } from '../services/aiservise';
+import { identifyPlant } from '../services/aiService';
 import PlantResult from './PlantResult';
 
 const createHistoryImage = (file) =>
@@ -37,8 +37,14 @@ export default function Scanner({ onScanComplete }) {
   const [scanError, setScanError] = useState('');
   const fileInputRef = useRef(null);
 
+  useEffect(() => () => {
+    if (imagePreview) {
+      URL.revokeObjectURL(imagePreview);
+    }
+  }, [imagePreview]);
+
   const handleImageUpload = async (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files?.[0];
     if (!file) return;
 
     const previewUrl = URL.createObjectURL(file);
@@ -92,7 +98,7 @@ export default function Scanner({ onScanComplete }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="scanner-dropzone border-2 border-dashed border-emerald-300 rounded-2xl p-12 text-center bg-emerald-50 cursor-pointer hover:bg-emerald-100 transition-colors"
-          onClick={() => fileInputRef.current.click()}
+          onClick={() => fileInputRef.current?.click()}
         >
           <input 
             type="file" 
@@ -106,7 +112,7 @@ export default function Scanner({ onScanComplete }) {
           <h3 className="text-lg font-semibold text-gray-800">Tap to upload or take a photo</h3>
           <p className="text-sm text-gray-500 mt-2">Supports JPG, PNG</p>
           
-          <button className="scanner-button mt-6 bg-emerald-600 text-white px-6 py-2 rounded-full font-medium flex items-center justify-center mx-auto space-x-2">
+          <button type="button" className="scanner-button mt-6 bg-emerald-600 text-white px-6 py-2 rounded-full font-medium flex items-center justify-center mx-auto space-x-2">
             <Camera className="w-4 h-4" />
             <span>Open Camera</span>
           </button>

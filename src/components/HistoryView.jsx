@@ -91,7 +91,7 @@ export default function HistoryView({ scans, onClearHistory, onScanAgain }) {
                   </HistoryDetailBlock>
 
                   {taxonomyEntries.length > 0 && (
-                    <HistoryDetailBlock icon={BookOpen} title="Taxonomy">
+                    <HistoryDetailBlock icon={BookOpen} title="Classification">
                       <dl className="history-taxonomy-list">
                         {taxonomyEntries.map(([key, value]) => (
                           <div key={key}>
