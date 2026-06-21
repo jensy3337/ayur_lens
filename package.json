@@ -1,4 +1,9 @@
 {
+  "name": "ayur_lens",
+  "version": "0.1.0",
+  "homepage": "https://jensy3337.github.io/ayur_lens/",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "dev": "vite --configLoader native",
     "build": "vite build --configLoader native",
@@ -6,10 +11,6 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "name": "project-plant",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
