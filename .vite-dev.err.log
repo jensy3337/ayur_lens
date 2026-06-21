@@ -1,0 +1,7 @@
+[31merror when starting dev server:
+[Error: EPERM: operation not permitted, unlink 'C:\Users\Nupur\OneDrive\Desktop\project\.vite-cache\deps\framer-motion.js'] {
+  errno: -4048,
+  code: 'EPERM',
+  syscall: 'unlink',
+  path: 'C:\\Users\\Nupur\\OneDrive\\Desktop\\project\\.vite-cache\\deps\\framer-motion.js'
+}[39m
