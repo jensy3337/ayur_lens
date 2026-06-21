@@ -12,10 +12,10 @@
       const baseUrl =
         (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) ||
         window.location.pathname.replace(/\/[^/]*$/, '/') ||
-        '/';
+        './';
 
       if (isLocalDev) {
-        import('/src/main.jsx');
+        import(`${baseUrl}src/main.jsx`);
       } else {
         const stylesheet = document.createElement('link');
         stylesheet.rel = 'stylesheet';

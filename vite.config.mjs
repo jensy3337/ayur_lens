@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  base: '/ayur_lens/',
+  base: './',
   plugins: [react()],
   cacheDir: '.vite-cache',
   build: {
