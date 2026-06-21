@@ -5,12 +5,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "vite --configLoader native",
-    "build": "vite build --configLoader native",
-    "preview": "vite preview --configLoader native --host 0.0.0.0",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
-  },
+  "dev": "vite --configLoader native",
+  "build": "vite build --configLoader native",
+  "preview": "vite preview --configLoader native --host 0.0.0.0",
+  "predeploy": "cross-env GITHUB_PAGES=true npm run build",
+  "deploy": "gh-pages -d dist"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
