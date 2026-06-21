@@ -9,16 +9,20 @@
     <div id="root"></div>
     <script type="module">
       const isLocalDev = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+      const baseUrl =
+        (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) ||
+        window.location.pathname.replace(/\/[^/]*$/, '/') ||
+        '/';
 
       if (isLocalDev) {
         import('/src/main.jsx');
       } else {
         const stylesheet = document.createElement('link');
         stylesheet.rel = 'stylesheet';
-        stylesheet.href = '/kj/assets/main.css';
+        stylesheet.href = `${baseUrl}assets/main.css`;
         document.head.appendChild(stylesheet);
 
-        import(/* @vite-ignore */ '/kj/assets/main.js');
+        import(/* @vite-ignore */ `${baseUrl}assets/main.js`);
       }
     </script>
   </body>

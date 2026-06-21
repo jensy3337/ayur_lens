@@ -4,6 +4,32 @@ import { UploadCloud, Camera, Loader2, ShieldAlert } from 'lucide-react';
 import { identifyPlant } from '../services/aiservise';
 import PlantResult from './PlantResult';
 
+const createHistoryImage = (file) =>
+  new Promise((resolve) => {
+    const image = new Image();
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      image.onload = () => {
+        const maxSize = 720;
+        const scale = Math.min(1, maxSize / Math.max(image.width, image.height));
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.max(1, Math.round(image.width * scale));
+        canvas.height = Math.max(1, Math.round(image.height * scale));
+
+        const context = canvas.getContext('2d');
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL('image/jpeg', 0.72));
+      };
+
+      image.onerror = () => resolve(reader.result);
+      image.src = reader.result;
+    };
+
+    reader.onerror = () => resolve('');
+    reader.readAsDataURL(file);
+  });
+
 export default function Scanner({ onScanComplete }) {
   const [imagePreview, setImagePreview] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
@@ -20,6 +46,7 @@ export default function Scanner({ onScanComplete }) {
     setResult(null);
     setScanError('');
     setIsScanning(true);
+    const historyImage = await createHistoryImage(file);
 
     try {
       const response = await identifyPlant(file);
@@ -29,6 +56,7 @@ export default function Scanner({ onScanComplete }) {
           id: `${Date.now()}-${response.plantData.id}`,
           scannedAt: new Date().toISOString(),
           confidenceScore: response.confidenceScore,
+          imagePreview: historyImage,
           plantData: response.plantData,
         });
       } else {

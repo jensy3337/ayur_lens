@@ -53,7 +53,15 @@ function App() {
     try {
       localStorage.setItem('ayush-lens-history', JSON.stringify(scanHistory));
     } catch {
-      // Some embedded previews block browser storage. The app still works without saved history.
+      try {
+        const detailsOnlyHistory = scanHistory.map((scan) => ({
+          ...scan,
+          imagePreview: '',
+        }));
+        localStorage.setItem('ayush-lens-history', JSON.stringify(detailsOnlyHistory));
+      } catch {
+        // Some embedded previews block browser storage. The app still works without saved history.
+      }
     }
   }, [scanHistory]);
 
@@ -67,7 +75,7 @@ function App() {
     setScanHistory((previousScans) => [
       scan,
       ...previousScans.filter((item) => item.id !== scan.id),
-    ].slice(0, 20));
+    ].slice(0, 10));
   };
 
   const clearHistory = () => {
