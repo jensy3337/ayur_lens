@@ -1,6 +1,0 @@
-
-> project-plant@1.0.0 dev
-> vite --configLoader native --host 127.0.0.1
-
-Port 5173 is in use, trying another one...
-[2m8:55:57 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m Re-optimizing dependencies because vite config has changed
