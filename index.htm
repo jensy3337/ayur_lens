@@ -4,26 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AyurLens</title>
+    <base href="./" />
   </head>
   <body>
     <div id="root"></div>
-    <script type="module">
-      const isLocalDev = ['localhost', '127.0.0.1'].includes(window.location.hostname);
-      const baseUrl =
-        (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) ||
-        window.location.pathname.replace(/\/[^/]*$/, '/') ||
-        './';
-
-      if (isLocalDev) {
-        import(`${baseUrl}src/main.jsx`);
-      } else {
-        const stylesheet = document.createElement('link');
-        stylesheet.rel = 'stylesheet';
-        stylesheet.href = `${baseUrl}assets/main.css`;
-        document.head.appendChild(stylesheet);
-
-        import(/* @vite-ignore */ `${baseUrl}assets/main.js`);
-      }
-    </script>
+    <script type="module" src="./src/main.jsx"></script>
   </body>
 </html>
